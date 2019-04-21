@@ -19,7 +19,8 @@ block() {
   local color=$1
 
   if [[ -z $color ]]; then
-    color=default
+    echo "#[default] "
+    return
   fi
 
   echo "#[bg=$color] "
