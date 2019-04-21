@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # {{{ color
-black="colour0"
-white="colour15"
-green="colour29"
-yellow_green="colour108"
-red="colour160"
-orange="colour202"
-dark_orange="colour208"
-navajo_white="colour223"
-light_black="colour235"
-dark_gray="colour237"
-light_gray="colour243"
+readonly BLACK="colour0"
+readonly WHITE="colour15"
+readonly GREEN="colour29"
+readonly YELLOW_GREEN="colour108"
+readonly RED="colour160"
+readonly ORANGE="colour202"
+readonly DARK_ORANGE="colour208"
+readonly NAVAJO_WHITE="colour223"
+readonly LIGHT_BLACK="colour235"
+readonly DARK_GRAY="colour237"
+readonly LIGHT_GRAY="colour243"
 # }}}
 
 # {{{ status
@@ -20,15 +20,15 @@ tmux set -g status-interval 1
 tmux set -g status-justify left
 
 # base color
-tmux set -g status-style bg=$light_black,fg=$dark_orange
+tmux set -g status-style bg=$LIGHT_BLACK,fg=$DARK_ORANGE
 # }}}
 
 # {{{ window status
-window_index="#[fg=$white]#[bg=$light_gray] #{window_index}#{window_flags} "
-window_name="#[bg=$dark_gray] #{window_name} "
+window_index="#[fg=$WHITE]#[bg=$LIGHT_GRAY] #{window_index}#{window_flags} "
+window_name="#[bg=$DARK_GRAY] #{window_name} "
 
-cur_window_index="#[bg=$yellow_green]#[fg=$black] #{window_index}#{window_flags} "
-cur_window_name="#[bg=$navajo_white] #{window_name} "
+cur_window_index="#[bg=$YELLOW_GREEN]#[fg=$BLACK] #{window_index}#{window_flags} "
+cur_window_name="#[bg=$NAVAJO_WHITE] #{window_name} "
 
 tmux set -g window-status-format "${window_index}${window_name}"
 tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
@@ -37,19 +37,19 @@ tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
 # {{{ left and right status
 # color block
 default_block="#[default]  "
-red_block="#[bg=$red] "
-orange_block="#[bg=$orange] "
-green_block="#[bg=$green] "
-yellow_green_block="#[bg=$yellow_green] "
-light_gray_block="#[bg=$light_gray] "
-dark_gray_block="#[bg=$dark_gray] "
+red_block="#[bg=$RED] "
+orange_block="#[bg=$ORANGE] "
+green_block="#[bg=$GREEN] "
+yellow_green_block="#[bg=$YELLOW_GREEN] "
+light_gray_block="#[bg=$LIGHT_GRAY] "
+dark_gray_block="#[bg=$DARK_GRAY] "
 
 color_blocks="${red_block}${orange_block}${green_block}${yellow_green_block}${light_gray_block}${dark_gray_block}"
 color_blocks_reverse="${dark_gray_block}${light_gray_block}${yellow_green_block}${green_block}${orange_block}${red_block}"
 
-host_name="#{?client_prefix,#[fg=$dark_gray]#[bg=$dark_orange]#[bold],#[bg=$dark_gray]} #H [#S] "
+host_name="#{?client_prefix,#[fg=$DARK_GRAY]#[bg=$DARK_ORANGE]#[bold],#[bg=$DARK_GRAY]} #H [#S] "
 battery_status="${dark_gray_block}#{battery_status_fg}#{battery_icon} #{battery_percentage}${dark_gray_block}"
-clock="#[bg=$dark_gray] %H:%M %Y-%m-%d(%a) "
+clock="#[bg=$DARK_GRAY] %H:%M %Y-%m-%d(%a) "
 status_right="${clock}${default_block}${color_blocks_reverse}"
 
 tmux set -g status-left-length 90
@@ -64,19 +64,19 @@ fi
 # }}}
 
 # {{{ pane
-tmux set -g pane-border-style fg=$dark_gray
-tmux set -g pane-active-border-style fg=$dark_orange
+tmux set -g pane-border-style fg=$DARK_GRAY
+tmux set -g pane-active-border-style fg=$DARK_ORANGE
 # }}}
 
 # {{{ mode
-tmux set -g mode-style bg=$dark_orange,fg=$light_black
+tmux set -g mode-style bg=$DARK_ORANGE,fg=$LIGHT_BLACK
 # }}}
 
 # {{{ message
-tmux set -g message-style bg=$light_black,fg=$dark_orange
+tmux set -g message-style bg=$LIGHT_BLACK,fg=$DARK_ORANGE
 # }}}
 
 # {{{ display pane number
-tmux set -g display-panes-colour $yellow_green
-tmux set -g display-panes-active-colour $dark_orange
+tmux set -g display-panes-colour $YELLOW_GREEN
+tmux set -g display-panes-active-colour $DARK_ORANGE
 # }}}
