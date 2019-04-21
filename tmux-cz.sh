@@ -14,6 +14,18 @@ readonly DARK_GRAY="colour237"
 readonly LIGHT_GRAY="colour243"
 # }}}
 
+# {{{ function
+block() {
+  local color=$1
+
+  if [[ -z $color ]]; then
+    color=default
+  fi
+
+  echo "#[bg=$color] "
+}
+# }}}
+
 # {{{ status
 # options
 tmux set -g status-interval 1
@@ -36,13 +48,13 @@ tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
 
 # {{{ left and right status
 # color block
-default_block="#[default]  "
-red_block="#[bg=$RED] "
-orange_block="#[bg=$ORANGE] "
-green_block="#[bg=$GREEN] "
-yellow_green_block="#[bg=$YELLOW_GREEN] "
-light_gray_block="#[bg=$LIGHT_GRAY] "
-dark_gray_block="#[bg=$DARK_GRAY] "
+default_block=$(block)$(block)
+red_block=$(block $RED)
+orange_block=$(block $ORANGE)
+green_block=$(block $GREEN)
+yellow_green_block=$(block $YELLOW_GREEN)
+light_gray_block=$(block $LIGHT_GRAY)
+dark_gray_block=$(block $DARK_GRAY)
 
 color_blocks="${red_block}${orange_block}${green_block}${yellow_green_block}${light_gray_block}${dark_gray_block}"
 color_blocks_reverse="${dark_gray_block}${light_gray_block}${yellow_green_block}${green_block}${orange_block}${red_block}"
