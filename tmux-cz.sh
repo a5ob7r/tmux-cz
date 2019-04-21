@@ -26,6 +26,19 @@ block() {
 }
 # }}}
 
+# {{{ color block components
+readonly TMUX_CZ_DEFAULT_BLOCK=$(block)$(block)
+readonly TMUX_CZ_RED_BLOCK=$(block $TMUX_CZ_RED)
+readonly TMUX_CZ_ORANGE_BLOCK=$(block $TMUX_CZ_ORANGE)
+readonly TMUX_CZ_GREEN_BLOCK=$(block $TMUX_CZ_GREEN)
+readonly TMUX_CZ_YELLOW_GREEN_BLOCK=$(block $TMUX_CZ_YELLOW_GREEN)
+readonly TMUX_CZ_LIGHT_GRAY_BLOCK=$(block $TMUX_CZ_LIGHT_GRAY)
+readonly TMUX_CZ_DARK_GRAY_BLOCK=$(block $TMUX_CZ_DARK_GRAY)
+
+readonly TMUX_CZ_COLOR_BLOCKS="${TMUX_CZ_RED_BLOCK}${TMUX_CZ_ORANGE_BLOCK}${TMUX_CZ_GREEN_BLOCK}${TMUX_CZ_YELLOW_GREEN_BLOCK}${TMUX_CZ_LIGHT_GRAY_BLOCK}${TMUX_CZ_DARK_GRAY_BLOCK}"
+readonly TMUX_CZ_COLOR_BLOCKS_REVERSE="${TMUX_CZ_DARK_GRAY_BLOCK}${TMUX_CZ_LIGHT_GRAY_BLOCK}${TMUX_CZ_YELLOW_GREEN_BLOCK}${TMUX_CZ_GREEN_BLOCK}${TMUX_CZ_ORANGE_BLOCK}${TMUX_CZ_RED_BLOCK}"
+# }}}
+
 # {{{ status
 # options
 tmux set -g status-interval 1
@@ -47,31 +60,19 @@ tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
 # }}}
 
 # {{{ left and right status
-# color block
-default_block=$(block)$(block)
-red_block=$(block $TMUX_CZ_RED)
-orange_block=$(block $TMUX_CZ_ORANGE)
-green_block=$(block $TMUX_CZ_GREEN)
-yellow_green_block=$(block $TMUX_CZ_YELLOW_GREEN)
-light_gray_block=$(block $TMUX_CZ_LIGHT_GRAY)
-dark_gray_block=$(block $TMUX_CZ_DARK_GRAY)
-
-color_blocks="${red_block}${orange_block}${green_block}${yellow_green_block}${light_gray_block}${dark_gray_block}"
-color_blocks_reverse="${dark_gray_block}${light_gray_block}${yellow_green_block}${green_block}${orange_block}${red_block}"
-
 host_name="#{?client_prefix,#[fg=$TMUX_CZ_DARK_GRAY]#[bg=$TMUX_CZ_DARK_ORANGE]#[bold],#[bg=$TMUX_CZ_DARK_GRAY]} #H [#S] "
-battery_status="${dark_gray_block}#{battery_status_fg}#{battery_icon} #{battery_percentage}${dark_gray_block}"
+battery_status="${TMUX_CZ_DARK_GRAY_BLOCK}#{battery_status_fg}#{battery_icon} #{battery_percentage}${TMUX_CZ_DARK_GRAY_BLOCK}"
 clock="#[bg=$TMUX_CZ_DARK_GRAY] %H:%M %Y-%m-%d(%a) "
-status_right="${clock}${default_block}${color_blocks_reverse}"
+status_right="${clock}${TMUX_CZ_DEFAULT_BLOCK}${TMUX_CZ_COLOR_BLOCKS_REVERSE}"
 
 tmux set -g status-left-length 90
-tmux set -g status-left "${color_blocks}${default_block}${host_name}${default_block}"
+tmux set -g status-left "${TMUX_CZ_COLOR_BLOCKS}${TMUX_CZ_DEFAULT_BLOCK}${host_name}${TMUX_CZ_DEFAULT_BLOCK}"
 tmux set -g status-right-length 90
 
 # If 
 tmux set -g status-right "${status_right}"
 if tmux show-option -gqv @plugin | grep tmux-battery > /dev/null 2>&1; then
-  tmux set -g status-right "${battery_status}${default_block}${status_right}"
+  tmux set -g status-right "${battery_status}${TMUX_CZ_DEFAULT_BLOCK}${status_right}"
 fi
 # }}}
 
