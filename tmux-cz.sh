@@ -1,11 +1,13 @@
-#!/usr/bin/env bash
+# Set useful shell options
+set -Cueo pipefail
+
+source "${CURRENT_DIR}/src/lib.sh"
 
 # {{{ color
 readonly TMUX_CZ_BLACK="colour0"
 readonly TMUX_CZ_WHITE="colour15"
 readonly TMUX_CZ_GREEN="colour29"
 readonly TMUX_CZ_YELLOW_GREEN="colour108"
-readonly TMUX_CZ_RED="colour160"
 readonly TMUX_CZ_ORANGE="colour202"
 readonly TMUX_CZ_DARK_ORANGE="colour208"
 readonly TMUX_CZ_NAVAJO_WHITE="colour223"
@@ -14,30 +16,33 @@ readonly TMUX_CZ_DARK_GRAY="colour237"
 readonly TMUX_CZ_LIGHT_GRAY="colour243"
 # }}}
 
-# {{{ function
-block() {
-  local color=$1
+# Left Decoration
+readonly TMUX_CZ_ORANGE_GREEN_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_ORANGE} ${TMUX_CZ_GREEN})"
+readonly TMUX_CZ_GREEN_YELLOW_GREEN_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_GREEN} ${TMUX_CZ_YELLOW_GREEN})"
+readonly TMUX_CZ_YELLOW_GREEN_LIGHT_GRAY_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_YELLOW_GREEN} ${TMUX_CZ_LIGHT_GRAY})"
+readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_LIGHT_GRAY} ${TMUX_CZ_DARK_GRAY})"
+readonly TMUX_CZ_LIGHT_GRAY_DARK_ORANGE_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_LIGHT_GRAY} ${TMUX_CZ_DARK_ORANGE})"
+readonly TMUX_CZ_LIGHT_BLACK_LIGHT_GRAY_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_LIGHT_BLACK} ${TMUX_CZ_LIGHT_GRAY})"
+readonly TMUX_CZ_LIGHT_BLACK_YELLOW_GREEN_LEFT_DECORATION_INFLATION="$(left_decoration_inflation ${TMUX_CZ_LIGHT_BLACK} ${TMUX_CZ_YELLOW_GREEN})"
 
-  if [[ -z $color ]]; then
-    echo "#[default] "
-    return
-  fi
+# Right Decoration
+readonly TMUX_CZ_ORANGE_GREEN_RIGHT_DECORATION_INFLATION="$(right_decoration_inflation ${TMUX_CZ_ORANGE} ${TMUX_CZ_GREEN})"
+readonly TMUX_CZ_GREEN_YELLOW_GREEN_RIGHT_DECORATION_INFLATION="$(right_decoration_inflation ${TMUX_CZ_GREEN} ${TMUX_CZ_YELLOW_GREEN})"
+readonly TMUX_CZ_YELLOW_GREEN_LIGHT_GRAY_RIGHT_DECORATION_INFLATION="$(right_decoration_inflation ${TMUX_CZ_YELLOW_GREEN} ${TMUX_CZ_LIGHT_GRAY})"
+readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_DECORATION_INFLATION="$(right_decoration_inflation ${TMUX_CZ_LIGHT_GRAY} ${TMUX_CZ_DARK_GRAY})"
 
-  echo "#[bg=$color] "
-}
-# }}}
+# Left Separator
+readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_SEPARATOR="$(left_separator ${TMUX_CZ_LIGHT_GRAY} ${TMUX_CZ_DARK_GRAY})"
+readonly TMUX_CZ_DARK_GRAY_LIGHT_BLACK_LEFT_SEPARATOR="$(left_separator ${TMUX_CZ_DARK_GRAY} ${TMUX_CZ_LIGHT_BLACK})"
+readonly TMUX_CZ_YELLOW_GREEN_NAVAJO_WHITE_LEFT_SEPARATOR="$(left_separator ${TMUX_CZ_YELLOW_GREEN} ${TMUX_CZ_NAVAJO_WHITE})"
+readonly TMUX_CZ_NAVAJO_WHITE_LIGHT_BLACK_LEFT_SEPARATOR="$(left_separator ${TMUX_CZ_NAVAJO_WHITE} ${TMUX_CZ_LIGHT_BLACK})"
+readonly TMUX_CZ_DARK_ORANGE_LIGHT_BLACK_LEFT_SEPARATOR="$(left_separator ${TMUX_CZ_DARK_ORANGE} ${TMUX_CZ_LIGHT_BLACK})"
 
-# {{{ color block components
-readonly TMUX_CZ_DEFAULT_BLOCK=$(block)$(block)
-readonly TMUX_CZ_RED_BLOCK=$(block $TMUX_CZ_RED)
-readonly TMUX_CZ_ORANGE_BLOCK=$(block $TMUX_CZ_ORANGE)
-readonly TMUX_CZ_GREEN_BLOCK=$(block $TMUX_CZ_GREEN)
-readonly TMUX_CZ_YELLOW_GREEN_BLOCK=$(block $TMUX_CZ_YELLOW_GREEN)
-readonly TMUX_CZ_LIGHT_GRAY_BLOCK=$(block $TMUX_CZ_LIGHT_GRAY)
-readonly TMUX_CZ_DARK_GRAY_BLOCK=$(block $TMUX_CZ_DARK_GRAY)
+# Right Separator
+readonly TMUX_CZ_DARK_GRAY_LIGHT_BLACK_RIGHT_SEPARATOR="$(right_separator ${TMUX_CZ_DARK_GRAY} ${TMUX_CZ_LIGHT_BLACK})"
 
-readonly TMUX_CZ_COLOR_BLOCKS="${TMUX_CZ_RED_BLOCK}${TMUX_CZ_ORANGE_BLOCK}${TMUX_CZ_GREEN_BLOCK}${TMUX_CZ_YELLOW_GREEN_BLOCK}${TMUX_CZ_LIGHT_GRAY_BLOCK}${TMUX_CZ_DARK_GRAY_BLOCK}"
-readonly TMUX_CZ_COLOR_BLOCKS_REVERSE="${TMUX_CZ_DARK_GRAY_BLOCK}${TMUX_CZ_LIGHT_GRAY_BLOCK}${TMUX_CZ_YELLOW_GREEN_BLOCK}${TMUX_CZ_GREEN_BLOCK}${TMUX_CZ_ORANGE_BLOCK}${TMUX_CZ_RED_BLOCK}"
+# Right Subseparator
+readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_SUBSEPARATOR="$(right_subseparator ${TMUX_CZ_LIGHT_GRAY} ${TMUX_CZ_DARK_GRAY})"
 # }}}
 
 # {{{ status
@@ -50,31 +55,35 @@ tmux set -g status-style bg=$TMUX_CZ_LIGHT_BLACK,fg=$TMUX_CZ_DARK_ORANGE
 # }}}
 
 # {{{ window status
-window_index="#[fg=$TMUX_CZ_WHITE]#[bg=$TMUX_CZ_LIGHT_GRAY] #{window_index}#{window_flags} "
-window_name="#[bg=$TMUX_CZ_DARK_GRAY] #{window_name} "
+window_index="${TMUX_CZ_LIGHT_BLACK_LIGHT_GRAY_LEFT_DECORATION_INFLATION}#[fg=$TMUX_CZ_WHITE]#[bg=$TMUX_CZ_LIGHT_GRAY] #{window_index}#{window_flags} ${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_SEPARATOR}"
+window_name="#[fg=${TMUX_CZ_WHITE},bg=$TMUX_CZ_DARK_GRAY] #{window_name} ${TMUX_CZ_DARK_GRAY_LIGHT_BLACK_LEFT_SEPARATOR}"
 
-cur_window_index="#[bg=$TMUX_CZ_YELLOW_GREEN]#[fg=$TMUX_CZ_BLACK] #{window_index}#{window_flags} "
-cur_window_name="#[bg=$TMUX_CZ_NAVAJO_WHITE] #{window_name} "
+cur_window_index="${TMUX_CZ_LIGHT_BLACK_YELLOW_GREEN_LEFT_DECORATION_INFLATION}#[bg=$TMUX_CZ_YELLOW_GREEN]#[fg=$TMUX_CZ_BLACK] #{window_index}#{window_flags} ${TMUX_CZ_YELLOW_GREEN_NAVAJO_WHITE_LEFT_SEPARATOR}"
+cur_window_name="#[fg=${TMUX_CZ_BLACK},bg=$TMUX_CZ_NAVAJO_WHITE] #{window_name} ${TMUX_CZ_NAVAJO_WHITE_LIGHT_BLACK_LEFT_SEPARATOR}"
 
 tmux set -g window-status-format "${window_index}${window_name}"
 tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
 # }}}
 
 # {{{ left and right status
-host_name="#{?client_prefix,#[fg=$TMUX_CZ_DARK_GRAY]#[bg=$TMUX_CZ_DARK_ORANGE]#[bold],#[bg=$TMUX_CZ_DARK_GRAY]} #H [#S] "
-battery_status="${TMUX_CZ_DARK_GRAY_BLOCK}#{battery_status_fg}#{battery_icon} #{battery_percentage}${TMUX_CZ_DARK_GRAY_BLOCK}"
-clock="#[bg=$TMUX_CZ_DARK_GRAY] %H:%M %Y-%m-%d(%a) "
-status_right="${clock}${TMUX_CZ_DEFAULT_BLOCK}${TMUX_CZ_COLOR_BLOCKS_REVERSE}"
+host_name="#{?client_prefix,${TMUX_CZ_LIGHT_GRAY_DARK_ORANGE_LEFT_DECORATION_INFLATION}#[fg=$TMUX_CZ_DARK_GRAY]#[bg=$TMUX_CZ_DARK_ORANGE]#[bold],${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_DECORATION_INFLATION}#[fg=${TMUX_CZ_DARK_ORANGE},bg=$TMUX_CZ_DARK_GRAY]} #H [#S] #{?client_prefix,${TMUX_CZ_DARK_ORANGE_LIGHT_BLACK_LEFT_SEPARATOR},${TMUX_CZ_DARK_GRAY_LIGHT_BLACK_LEFT_SEPARATOR}}"
+
+readonly CLOCK="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] %H:%M "
+readonly CALENDAR="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] %Y-%m-%d(%a) "
+
+if tmux show-option -gqv '@plugin' | grep -q tmux-battery; then
+  readonly BATTERY_STATUS="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] #{battery_status_fg}#{battery_icon} #{battery_percentage} ${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_SUBSEPARATOR}"
+else
+  readonly BATTERY_STATUS=''
+fi
+
+readonly STATUS_LEFT="${TMUX_CZ_ORANGE_GREEN_LEFT_DECORATION_INFLATION}${TMUX_CZ_GREEN_YELLOW_GREEN_LEFT_DECORATION_INFLATION}${TMUX_CZ_YELLOW_GREEN_LIGHT_GRAY_LEFT_DECORATION_INFLATION}${host_name} "
+readonly STATUS_RIGHT="${TMUX_CZ_DARK_GRAY_LIGHT_BLACK_RIGHT_SEPARATOR}${BATTERY_STATUS}${CLOCK}${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_SUBSEPARATOR}${CALENDAR}${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_DECORATION_INFLATION}${TMUX_CZ_YELLOW_GREEN_LIGHT_GRAY_RIGHT_DECORATION_INFLATION}${TMUX_CZ_GREEN_YELLOW_GREEN_RIGHT_DECORATION_INFLATION}${TMUX_CZ_ORANGE_GREEN_RIGHT_DECORATION_INFLATION}"
 
 tmux set -g status-left-length 90
-tmux set -g status-left "${TMUX_CZ_COLOR_BLOCKS}${TMUX_CZ_DEFAULT_BLOCK}${host_name}${TMUX_CZ_DEFAULT_BLOCK}"
+tmux set -g status-left "${STATUS_LEFT}"
 tmux set -g status-right-length 90
-
-# If 
-tmux set -g status-right "${status_right}"
-if tmux show-option -gqv @plugin | grep tmux-battery > /dev/null 2>&1; then
-  tmux set -g status-right "${battery_status}${TMUX_CZ_DEFAULT_BLOCK}${status_right}"
-fi
+tmux set -g status-right "${STATUS_RIGHT}"
 # }}}
 
 # {{{ pane
