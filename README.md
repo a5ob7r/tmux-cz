@@ -1,7 +1,7 @@
 # Tmux CZ
 A tmux theme inspired CZ2128 Delta
 
-![](doc/tmux-cz.png)
+![](doc/tmux-cz2.png)
 
 ## Installation
 ### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
@@ -26,6 +26,21 @@ run-shell ~/clone/path/tmux-cz.tmux
 3. Reload `~/.tmux.conf`
 ```shell
 tmux source-file ~/.tmux.conf
+```
+
+## Use Powerline Font
+![](doc/tmux-cz3.png)
+This plugin can use powerline font.
+Please add bottom configures in your `.tmux.conf`.
+
+```
+set -g @TMUX_CZ_LEFT_DECORATION '\ue0b0'
+set -g @TMUX_CZ_RIGHT_DECORATION '\ue0b2'
+
+set -g @TMUX_CZ_LEFT_SEPARATOR '\ue0b0'
+set -g @TMUX_CZ_LEFT_SUBSEPARATOR '\ue0b1'
+set -g @TMUX_CZ_RIGHT_SEPARATOR '\ue0b2'
+set -g @TMUX_CZ_RIGHT_SUBSEPARATOR '\ue0b3'
 ```
 
 ## Supporting tmux-battery
