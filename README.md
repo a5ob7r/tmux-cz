@@ -3,6 +3,10 @@ A tmux theme inspired CZ2128 Delta
 
 ![](doc/tmux-cz2.png)
 
+## Requirements
+- Bash 4.2+ (optional)
+  - to escape Unicode
+
 ## Installation
 ### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
 1. Add plugin to the list of TPM plugins in `.tmux.conf`
