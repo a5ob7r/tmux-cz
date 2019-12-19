@@ -4,8 +4,12 @@ A tmux theme inspired CZ2128 Delta
 ![](doc/tmux-cz2.png)
 
 ## Requirements
-- Bash 4.2+ (optional)
-  - to escape Unicode
+To escape Unicode codepoint (optional)
+- Tmux 3.0+
+
+  or
+
+- Bash 4.2+
 
 ## Installation
 ### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
