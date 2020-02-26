@@ -53,10 +53,9 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR '\ue0b3'
 
 ## Supporting tmux-battery
 This theme supports [tmux-battery](https://github.com/tmux-plugins/tmux-battery).
-Please list this theme plugin above tmux/battery, if you want to use it.
+Please list this theme plugin and tmux/battery, if you want to use it.
 ```tmux
 ...
-# List above tmux/battery
 set -g @plugin 'a5ob7r/tmux-cz'
 ...
 set -g @plugin 'tmux-plugins/tmux-battery'

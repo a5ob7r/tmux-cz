@@ -4,6 +4,33 @@ tmux_variable_value() {
   tmux show -gqv "${TMUX_VARIABLE_NAME}"
 }
 
+#######################################
+# Detect a tmux plugin enabled
+# Global:
+#   None
+# Arguments:
+#   PLUGIN: A tmux plugin name
+# Return:
+#   0 or 1: Is a tmux plugin enabled?
+#######################################
+is_plugin_enabled() {
+  local -r PLUGIN="${1}"
+
+  local -ra CONFIGS=( \
+    ~/.tmux.conf \
+    "${XDG_CONFIG_HOME:-${HOME}/.config}/tmux/tmux.conf" \
+  )
+
+  for conf in "${CONFIGS[@]}"; do
+    if [[ -f "${conf}" ]]; then
+      grep -Eq "^[\ \t]*set[\ \t]+-g[\ \t]+@plugin[\ \t]+['\"]${PLUGIN}['\"]" "${conf}" \
+        && return 0
+    fi
+  done
+
+  return 1
+}
+
 color_font() {
   local -r FG_COLOR="${1}"
   local -r BG_COLOR="${2}"

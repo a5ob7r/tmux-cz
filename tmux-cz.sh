@@ -71,7 +71,7 @@ host_name="#{?client_prefix,${TMUX_CZ_LIGHT_GRAY_DARK_ORANGE_LEFT_DECORATION_INF
 readonly CLOCK="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] %H:%M "
 readonly CALENDAR="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] %Y-%m-%d(%a) "
 
-if tmux show-option -gqv '@plugin' | grep -q tmux-battery; then
+if is_plugin_enabled 'tmux-plugins/tmux-battery'; then
   readonly BATTERY_STATUS="#[fg=${TMUX_CZ_DARK_ORANGE}]#[bg=${TMUX_CZ_DARK_GRAY}] #{battery_status_fg}#{battery_icon} #{battery_percentage} ${TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_SUBSEPARATOR}"
 else
   readonly BATTERY_STATUS=''
