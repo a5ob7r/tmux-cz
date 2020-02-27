@@ -1,10 +1,13 @@
 # Tmux CZ
+
 A tmux theme inspired CZ2128 Delta
 
-![](doc/tmux-cz2.png)
+![tmux statusline with tmux-cz](doc/tmux-cz2.png)
 
 ## Requirements
+
 To escape Unicode codepoint (optional)
+
 - Tmux 3.0+
 
   or
@@ -12,36 +15,45 @@ To escape Unicode codepoint (optional)
 - Bash 4.2+
 
 ## Installation
-### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
-1. Add plugin to the list of TPM plugins in `.tmux.conf`
-```tmux
-set -g @plugin 'a5ob7r/tmux-cz'
-```
 
-2. Hit `prefix + I` to fetch the plugin and source it.
+### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
+
+1. Add plugin to the list of TPM plugins in `.tmux.conf`
+
+    ```tmux
+    set -g @plugin 'a5ob7r/tmux-cz'
+    ```
+
+1. Hit `prefix + I` to fetch the plugin and source it.
 
 ### Manual Installation
+
 1. Clone repository to local.
-```shell
-$ git clone https://github.com/a5ob7r/tmux-cz.git ~/clone/path
-```
 
-2. Add this line to `~/.tmux.conf`
-```tmux
-run-shell ~/clone/path/tmux-cz.tmux
-```
+    ```shell
+    $ git clone https://github.com/a5ob7r/tmux-cz.git ~/clone/path
+    ```
 
-3. Reload `~/.tmux.conf`
-```shell
-tmux source-file ~/.tmux.conf
-```
+1. Add this line to `~/.tmux.conf`
+
+    ```tmux
+    run-shell ~/clone/path/tmux-cz.tmux
+    ```
+
+1. Reload `~/.tmux.conf`
+
+    ```shell
+    $ tmux source-file ~/.tmux.conf
+    ```
 
 ## Use Powerline Font
-![](doc/tmux-cz3.png)
+
+![tmux statusline with tmux-cz using powerline font](doc/tmux-cz3.png)
+
 This plugin can use powerline font.
 Please add bottom configures in your `.tmux.conf`.
 
-```
+```tmux
 set -g @TMUX_CZ_LEFT_DECORATION '\ue0b0'
 set -g @TMUX_CZ_RIGHT_DECORATION '\ue0b2'
 
@@ -52,8 +64,10 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR '\ue0b3'
 ```
 
 ## Supporting tmux-battery
+
 This theme supports [tmux-battery](https://github.com/tmux-plugins/tmux-battery).
 Please list this theme plugin above tmux-battery, if you want to use it.
+
 ```tmux
 ...
 set -g @plugin 'a5ob7r/tmux-cz'
@@ -63,4 +77,5 @@ set -g @plugin 'tmux-plugins/tmux-battery'
 ```
 
 ## License
+
 MIT
