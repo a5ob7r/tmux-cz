@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 tmux_variable_value() {
   local -r TMUX_VARIABLE_NAME="${1}"
 

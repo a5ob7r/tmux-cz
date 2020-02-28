@@ -3,10 +3,8 @@
 readonly CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 main() {
-  local theme='cz'
-
-  # shellcheck source=/dev/null
-  source "$CURRENT_DIR"/tmux-$theme.sh
+  # shellcheck source=tmux-cz.sh
+  source "${CURRENT_DIR}/tmux-cz.sh"
 }
 
 main

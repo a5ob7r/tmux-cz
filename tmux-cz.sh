@@ -1,6 +1,9 @@
+#!/usr/bin/env bash
+
 # Set useful shell options
 set -Cueo pipefail
 
+# shellcheck source=src/lib.sh
 source "${CURRENT_DIR}/src/lib.sh"
 
 # {{{ color
