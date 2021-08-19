@@ -49,10 +49,6 @@ readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_RIGHT_SUBSEPARATOR="$(right_subseparator $
 # }}}
 
 # {{{ status
-# options
-tmux set -g status-interval 1
-tmux set -g status-justify left
-
 # base color
 tmux set -g status-style bg=$TMUX_CZ_LIGHT_BLACK,fg=$TMUX_CZ_DARK_ORANGE
 # }}}
