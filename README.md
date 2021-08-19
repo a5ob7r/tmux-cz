@@ -46,7 +46,18 @@ To escape Unicode codepoint (optional)
     $ tmux source-file ~/.tmux.conf
     ```
 
-## Use Powerline Font
+## Configurations
+
+### Hide extra decorations
+
+Hide extra decorations on leftend or rightend.
+
+```tmux
+set -g @TMUX_CZ_HIDE_LEFT_DECORATION 1
+set -g @TMUX_CZ_HIDE_RIGHT_DECORATION 1
+```
+
+### Use Powerline Font
 
 ![tmux statusline with tmux-cz using powerline font](doc/tmux-cz3.png)
 
@@ -63,7 +74,7 @@ set -g @TMUX_CZ_RIGHT_SEPARATOR '\ue0b2'
 set -g @TMUX_CZ_RIGHT_SUBSEPARATOR '\ue0b3'
 ```
 
-## Supporting tmux-battery
+### Supporting tmux-battery
 
 This theme supports [tmux-battery](https://github.com/tmux-plugins/tmux-battery).
 Please list this theme plugin above tmux-battery, if you want to use it.
