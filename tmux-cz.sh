@@ -7,16 +7,16 @@ set -Cueo pipefail
 source "$CURRENT_DIR/src/lib.sh"
 
 # {{{ color
-readonly TMUX_CZ_BLACK="colour0"
-readonly TMUX_CZ_WHITE="colour15"
-readonly TMUX_CZ_GREEN="colour29"
-readonly TMUX_CZ_YELLOW_GREEN="colour108"
-readonly TMUX_CZ_ORANGE="colour202"
-readonly TMUX_CZ_DARK_ORANGE="colour208"
-readonly TMUX_CZ_NAVAJO_WHITE="colour223"
-readonly TMUX_CZ_LIGHT_BLACK="colour235"
-readonly TMUX_CZ_DARK_GRAY="colour237"
-readonly TMUX_CZ_LIGHT_GRAY="colour243"
+readonly TMUX_CZ_BLACK=colour0
+readonly TMUX_CZ_WHITE=colour15
+readonly TMUX_CZ_GREEN=colour29
+readonly TMUX_CZ_YELLOW_GREEN=colour108
+readonly TMUX_CZ_ORANGE=colour202
+readonly TMUX_CZ_DARK_ORANGE=colour208
+readonly TMUX_CZ_NAVAJO_WHITE=colour223
+readonly TMUX_CZ_LIGHT_BLACK=colour235
+readonly TMUX_CZ_DARK_GRAY=colour237
+readonly TMUX_CZ_LIGHT_GRAY=colour243
 # }}}
 
 # Left Decoration
