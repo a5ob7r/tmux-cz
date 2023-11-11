@@ -116,18 +116,18 @@ enable_default_status_right_elements=1
 
 while read -r; do
   case "$REPLY" in
-    @TMUX_CZ_LEFT_ELEMENT_\ * )
+    @TMUX_CZ_LEFT_STATUS_ELEMENT_\ * )
       clear_status_left_elements=1
       ;;
-    @TMUX_CZ_LEFT_ELEMENT_* )
-      status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_LEFT_ELEMENT_* }")")
+    @TMUX_CZ_LEFT_STATUS_ELEMENT_* )
+      status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_LEFT_STATUS_ELEMENT_* }")")
       enable_default_status_left_elements=0
       ;;
-    @TMUX_CZ_RIGHT_ELEMENT_\ * )
+    @TMUX_CZ_RIGHT_STATUS_ELEMENT_\ * )
       clear_status_right_elements=1
       ;;
-    @TMUX_CZ_RIGHT_ELEMENT_* )
-      status_right_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_RIGHT_ELEMENT_* }")")
+    @TMUX_CZ_RIGHT_STATUS_ELEMENT_* )
+      status_right_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_RIGHT_STATUS_ELEMENT_* }")")
       enable_default_status_right_elements=0
       ;;
     * )
