@@ -43,7 +43,7 @@ format_to_toggle_bold_by_client_prefix () {
 fetch_tmux_option () {
   local variable_name=$1
 
-  tmux -gv "$variable_name" 2>/dev/null
+  tmux show-options -gv "$variable_name" 2>/dev/null
 }
 # }}}
 
