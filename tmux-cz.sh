@@ -301,6 +301,24 @@ for (( i = 0; i < ${#status_left_elements[@]}; i++ )); do
   fi
 done
 
+# status-left paddings
+if (( ${#status_left_elements[@]} != 0 )); then
+  if [[ -z $left_separator_glyph ]]; then
+    tmux set -ga status-left '  '
+  else
+    tmux set -ga status-left ' '
+  fi
+fi
+
+# status-right paddings
+if (( ${#status_right_elements[@]} != 0 )); then
+  if [[ -z $right_separator_glyph ]]; then
+    tmux set -ga status-right '  '
+  else
+    tmux set -ga status-right ' '
+  fi
+fi
+
 for (( i = 0; i < ${#status_right_elements[@]}; i++ )); do
   if (( i == 0 )); then
     tmux set -ga status-right "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_LIGHT_BLACK]$right_separator_glyph#[none]"
