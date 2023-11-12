@@ -3,9 +3,6 @@
 # Set useful shell options
 set -Cueo pipefail
 
-# shellcheck source=src/lib.sh
-source "$CURRENT_DIR/src/lib.sh"
-
 # Utilities {{{
 strip_quotations () {
   case "$1" in
@@ -60,31 +57,9 @@ readonly TMUX_CZ_DARK_GRAY=colour237
 readonly TMUX_CZ_LIGHT_GRAY=colour243
 # }}}
 
-# Left Decoration
-readonly TMUX_CZ_LIGHT_BLACK_LIGHT_GRAY_LEFT_DECORATION_INFLATION=$(left_decoration_inflation "$TMUX_CZ_LIGHT_BLACK" "$TMUX_CZ_LIGHT_GRAY")
-readonly TMUX_CZ_LIGHT_BLACK_YELLOW_GREEN_LEFT_DECORATION_INFLATION=$(left_decoration_inflation "$TMUX_CZ_LIGHT_BLACK" "$TMUX_CZ_YELLOW_GREEN")
-
-# Left Separator
-readonly TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_SEPARATOR=$(left_separator "$TMUX_CZ_LIGHT_GRAY" "$TMUX_CZ_DARK_GRAY")
-readonly TMUX_CZ_DARK_GRAY_LIGHT_BLACK_LEFT_SEPARATOR=$(left_separator "$TMUX_CZ_DARK_GRAY" "$TMUX_CZ_LIGHT_BLACK")
-readonly TMUX_CZ_YELLOW_GREEN_NAVAJO_WHITE_LEFT_SEPARATOR=$(left_separator "$TMUX_CZ_YELLOW_GREEN" "$TMUX_CZ_NAVAJO_WHITE")
-readonly TMUX_CZ_NAVAJO_WHITE_LIGHT_BLACK_LEFT_SEPARATOR=$(left_separator "$TMUX_CZ_NAVAJO_WHITE" "$TMUX_CZ_LIGHT_BLACK")
-# }}}
-
 # {{{ status
 # base color
 tmux set -g status-style "bg=$TMUX_CZ_LIGHT_BLACK,fg=$TMUX_CZ_DARK_ORANGE"
-# }}}
-
-# {{{ window status
-window_index="$TMUX_CZ_LIGHT_BLACK_LIGHT_GRAY_LEFT_DECORATION_INFLATION#[fg=$TMUX_CZ_WHITE]#[bg=$TMUX_CZ_LIGHT_GRAY] #{window_index}#{window_flags} $TMUX_CZ_LIGHT_GRAY_DARK_GRAY_LEFT_SEPARATOR"
-window_name="#[fg=$TMUX_CZ_WHITE,bg=$TMUX_CZ_DARK_GRAY] #{window_name} $TMUX_CZ_DARK_GRAY_LIGHT_BLACK_LEFT_SEPARATOR"
-
-cur_window_index="$TMUX_CZ_LIGHT_BLACK_YELLOW_GREEN_LEFT_DECORATION_INFLATION#[bg=$TMUX_CZ_YELLOW_GREEN]#[fg=$TMUX_CZ_BLACK] #{window_index}#{window_flags} $TMUX_CZ_YELLOW_GREEN_NAVAJO_WHITE_LEFT_SEPARATOR"
-cur_window_name="#[fg=$TMUX_CZ_BLACK,bg=$TMUX_CZ_NAVAJO_WHITE] #{window_name} $TMUX_CZ_NAVAJO_WHITE_LIGHT_BLACK_LEFT_SEPARATOR"
-
-tmux set -g window-status-format "${window_index}${window_name}"
-tmux set -g window-status-current-format "${cur_window_index}${cur_window_name}"
 # }}}
 
 # {{{ pane
@@ -106,7 +81,22 @@ tmux set -g display-panes-active-colour "$TMUX_CZ_DARK_ORANGE"
 # }}}
 
 # overhaul {{{
-# status-left / status-right {{{
+# parse user options {{{
+# window-status / window-status-current
+window_status_main_elements=()
+window_status_sub_elements=()
+window_status_current_main_elements=()
+window_status_current_sub_elements=()
+clear_window_status_main_elements=0
+clear_window_status_sub_elements=0
+clear_window_status_current_main_elements=0
+clear_window_status_current_sub_elements=0
+enable_default_window_status_main_elements=1
+enable_default_window_status_sub_elements=1
+enable_default_window_status_current_main_elements=1
+enable_default_window_status_current_sub_elements=1
+
+# status-left / status-right
 status_left_elements=()
 status_right_elements=()
 clear_status_left_elements=0
@@ -114,8 +104,43 @@ clear_status_right_elements=0
 enable_default_status_left_elements=1
 enable_default_status_right_elements=1
 
+left_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_DECORATION || echo -n '')
+left_separator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SEPARATOR || echo -n '█')
+left_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SUBSEPARATOR || echo -n '|')
+_right_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_DECORATION || echo -n '')
+right_separator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SEPARATOR || echo -n '█')
+right_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SUBSEPARATOR || echo -n '|')
+
 while read -r; do
   case "$REPLY" in
+    @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_\ * )
+      clear_window_status_main_elements=1
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_* )
+      window_status_main_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_* }")")
+      enable_default_window_status_main_elements=0
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_\ * )
+      clear_window_status_sub_elements=1
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* )
+      window_status_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* }")")
+      enable_default_window_status_sub_elements=0
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_\ * )
+      clear_window_status_current_main_elements=1
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_* )
+      window_status_current_main_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_* }")")
+      enable_default_window_status_current_main_elements=0
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_\ * )
+      clear_window_status_current_sub_elements=1
+      ;;
+    @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_* )
+      window_status_current_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* }")")
+      enable_default_window_status_current_sub_elements=0
+      ;;
     @TMUX_CZ_LEFT_STATUS_ELEMENT_\ * )
       clear_status_left_elements=1
       ;;
@@ -135,6 +160,30 @@ while read -r; do
   esac
 done < <(tmux show-options -g || true)
 
+if (( enable_default_window_status_main_elements )); then
+  window_status_main_elements=(
+    ' #{window_name} '
+  )
+fi
+
+if (( enable_default_window_status_sub_elements )); then
+  window_status_sub_elements=(
+    ' #{window_index}#{window_flags} '
+  )
+fi
+
+if (( enable_default_window_status_current_main_elements )); then
+  window_status_current_main_elements=(
+    ' #{window_name} '
+  )
+fi
+
+if (( enable_default_window_status_current_sub_elements )); then
+  window_status_current_sub_elements=(
+    ' #{window_index}#{window_flags} '
+  )
+fi
+
 if (( enable_default_status_left_elements )); then
   status_left_elements=(
     TMUX_CZ_LEFT_DECORATION
@@ -150,6 +199,22 @@ if (( enable_default_status_right_elements )); then
   )
 fi
 
+if (( clear_window_status_main_elements )); then
+  window_status_main_elements=()
+fi
+
+if (( clear_window_status_sub_elements )); then
+  window_status_sub_elements=()
+fi
+
+if (( clear_window_status_current_main_elements )); then
+  window_status_current_main_elements=()
+fi
+
+if (( clear_window_status_current_sub_elements )); then
+  window_status_current_sub_elements=()
+fi
+
 if (( clear_status_left_elements )); then
   status_left_elements=()
 fi
@@ -157,14 +222,63 @@ fi
 if (( clear_status_right_elements )); then
   status_right_elements=()
 fi
+# }}}
 
+# window-status-format {{{
+tmux set -g window-status-format ''
+
+tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_LIGHT_GRAY]$left_decoration_glyph#[none]"
+
+for (( i = 0; i < ${#window_status_sub_elements[@]}; i++ )); do
+  if (( i != 0 )); then
+    tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_LIGHT_GRAY]$left_subseparator_glyph#[none]"
+  fi
+
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_WHITE,bg=$TMUX_CZ_LIGHT_GRAY]${window_status_sub_elements[$i]}#[none]"
+done
+
+tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$left_decoration_glyph#[none]"
+
+for (( i = 0; i < ${#window_status_main_elements[@]}; i++ )); do
+  if (( i != 0 )); then
+    tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$left_subseparator_glyph#[none]"
+  fi
+
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_WHITE,bg=$TMUX_CZ_DARK_GRAY]${window_status_main_elements[$i]}#[none]"
+done
+
+tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_LIGHT_BLACK]$left_decoration_glyph#[none]"
+# }}}
+
+# window-status-current-format {{{
+tmux set -g window-status-current-format ''
+
+tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]$left_decoration_glyph#[none]"
+
+for (( i = 0; i < ${#window_status_current_sub_elements[@]}; i++ )); do
+  if (( i != 0 )); then
+    tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]$left_subseparator_glyph#[none]"
+  fi
+
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]${window_status_current_sub_elements[$i]}#[none]"
+done
+
+tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_NAVAJO_WHITE]$left_decoration_glyph#[none]"
+
+for (( i = 0; i < ${#window_status_current_main_elements[@]}; i++ )); do
+  if (( i != 0 )); then
+    tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_NAVAJO_WHITE]$left_subseparator_glyph#[none]"
+  fi
+
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_BLACK,bg=$TMUX_CZ_NAVAJO_WHITE]${window_status_current_main_elements[$i]}#[none]"
+done
+
+tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_NAVAJO_WHITE,bg=$TMUX_CZ_LIGHT_BLACK]$left_decoration_glyph#[none]"
+# }}}
+
+# status-left / status-right {{{
 tmux set -g status-left ''
 tmux set -g status-right ''
-
-left_separator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SEPARATOR || echo -n '█')
-left_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SUBSEPARATOR || echo -n '|')
-right_separator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SEPARATOR || echo -n '█')
-right_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SUBSEPARATOR || echo -n '|')
 
 for (( i = 0; i < ${#status_left_elements[@]}; i++ )); do
   case "${status_left_elements[$i]}" in
