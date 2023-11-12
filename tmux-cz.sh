@@ -86,10 +86,6 @@ window_status_main_elements=()
 window_status_sub_elements=()
 window_status_current_main_elements=()
 window_status_current_sub_elements=()
-clear_window_status_main_elements=0
-clear_window_status_sub_elements=0
-clear_window_status_current_main_elements=0
-clear_window_status_current_sub_elements=0
 enable_default_window_status_main_elements=1
 enable_default_window_status_sub_elements=1
 enable_default_window_status_current_main_elements=1
@@ -98,8 +94,6 @@ enable_default_window_status_current_sub_elements=1
 # status-left / status-right
 status_left_elements=()
 status_right_elements=()
-clear_status_left_elements=0
-clear_status_right_elements=0
 enable_default_status_left_elements=1
 enable_default_status_right_elements=1
 
@@ -113,42 +107,42 @@ right_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SUBSEPARATOR || echo
 while read -r; do
   case "$REPLY" in
     @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_\ * )
-      clear_window_status_main_elements=1
+      enable_default_window_status_main_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_* )
       window_status_main_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_* }")")
       enable_default_window_status_main_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_\ * )
-      clear_window_status_sub_elements=1
+      enable_default_window_status_sub_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* )
       window_status_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* }")")
       enable_default_window_status_sub_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_\ * )
-      clear_window_status_current_main_elements=1
+      enable_default_window_status_current_main_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_* )
       window_status_current_main_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_* }")")
       enable_default_window_status_current_main_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_\ * )
-      clear_window_status_current_sub_elements=1
+      enable_default_window_status_current_sub_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_* )
       window_status_current_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* }")")
       enable_default_window_status_current_sub_elements=0
       ;;
     @TMUX_CZ_LEFT_STATUS_ELEMENT_\ * )
-      clear_status_left_elements=1
+      enable_default_status_left_elements=0
       ;;
     @TMUX_CZ_LEFT_STATUS_ELEMENT_* )
       status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_LEFT_STATUS_ELEMENT_* }")")
       enable_default_status_left_elements=0
       ;;
     @TMUX_CZ_RIGHT_STATUS_ELEMENT_\ * )
-      clear_status_right_elements=1
+      enable_default_status_right_elements=0
       ;;
     @TMUX_CZ_RIGHT_STATUS_ELEMENT_* )
       status_right_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_RIGHT_STATUS_ELEMENT_* }")")
@@ -196,30 +190,6 @@ if (( enable_default_status_right_elements )); then
     ' %Y-%m-%d(%a) '
     TMUX_CZ_RIGHT_DECORATION
   )
-fi
-
-if (( clear_window_status_main_elements )); then
-  window_status_main_elements=()
-fi
-
-if (( clear_window_status_sub_elements )); then
-  window_status_sub_elements=()
-fi
-
-if (( clear_window_status_current_main_elements )); then
-  window_status_current_main_elements=()
-fi
-
-if (( clear_window_status_current_sub_elements )); then
-  window_status_current_sub_elements=()
-fi
-
-if (( clear_status_left_elements )); then
-  status_left_elements=()
-fi
-
-if (( clear_status_right_elements )); then
-  status_right_elements=()
 fi
 # }}}
 
