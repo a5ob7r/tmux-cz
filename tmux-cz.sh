@@ -282,17 +282,21 @@ tmux set -g status-right ''
 for (( i = 0; i < ${#status_left_elements[@]}; i++ )); do
   case "${status_left_elements[$i]}" in
     TMUX_CZ_LEFT_DECORATION )
+      if (( i != 0 )); then
+        tmux set -ga status-left "#[bg=$TMUX_CZ_ORANGE]$(format_to_toggle_foreground_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY" || true)$left_separator_glyph#[none]"
+      fi
+
       tmux set -ga status-left "#[fg=$TMUX_CZ_ORANGE,bg=$TMUX_CZ_GREEN]$left_decoration_glyph#[none]"
       tmux set -ga status-left "#[fg=$TMUX_CZ_GREEN,bg=$TMUX_CZ_YELLOW_GREEN]$left_decoration_glyph#[none]"
       tmux set -ga status-left "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_LIGHT_GRAY]$left_decoration_glyph#[none]"
       tmux set -ga status-left "#[fg=$TMUX_CZ_LIGHT_GRAY]$(format_to_toggle_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY" || true)$left_decoration_glyph#[none]"
       ;;
     * )
-      tmux set -ga status-left "$({ format_to_swap_foreground_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; format_to_toggle_bold_by_client_prefix; } || true)${status_left_elements[$i]}#[none]"
-
-      if (( i != ${#status_left_elements[@]} - 1 )); then
+      if (( i != 0 )) && [[ ${status_left_elements[i - 1]} != TMUX_CZ_LEFT_DECORATION ]]; then
         tmux set -ga status-left "$({ format_to_toggle_foreground_color_by_client_prefix "$TMUX_CZ_DARK_GRAY" "$TMUX_CZ_LIGHT_GRAY"; format_to_toggle_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; } || true)$left_subseparator_glyph#[none]"
       fi
+
+      tmux set -ga status-left "$({ format_to_swap_foreground_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; format_to_toggle_bold_by_client_prefix; } || true)${status_left_elements[i]}#[none]"
       ;;
   esac
 
@@ -330,9 +334,13 @@ for (( i = 0; i < ${#status_right_elements[@]}; i++ )); do
       tmux set -ga status-right "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_LIGHT_GRAY]$right_decoration_glyph#[none]"
       tmux set -ga status-right "#[fg=$TMUX_CZ_GREEN,bg=$TMUX_CZ_YELLOW_GREEN]$right_decoration_glyph#[none]"
       tmux set -ga status-right "#[fg=$TMUX_CZ_ORANGE,bg=$TMUX_CZ_GREEN]$right_decoration_glyph#[none]"
+
+      if (( i != ${#status_right_elements[@]} - 1 )); then
+        tmux set -ga status-right "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_ORANGE]$right_separator_glyph#[none]"
+      fi
       ;;
     * )
-      if (( i != 0 )); then
+      if (( i != 0 )) && [[ ${status_right_elements[i - 1]} != TMUX_CZ_RIGHT_DECORATION ]]; then
         tmux set -ga status-right "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$right_subseparator_glyph#[none]"
       fi
 
