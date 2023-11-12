@@ -80,7 +80,6 @@ tmux set -g display-panes-colour "$TMUX_CZ_YELLOW_GREEN"
 tmux set -g display-panes-active-colour "$TMUX_CZ_DARK_ORANGE"
 # }}}
 
-# overhaul {{{
 # parse user options {{{
 # window-status / window-status-current
 window_status_main_elements=()
@@ -327,5 +326,4 @@ done
 # Set a large enough value to show all of contents of left and right status bars.
 tmux set -g status-left-length 255
 tmux set -g status-right-length 255
-# }}}
 # }}}
