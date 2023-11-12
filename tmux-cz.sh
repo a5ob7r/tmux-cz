@@ -59,20 +59,20 @@ readonly TMUX_CZ_LIGHT_GRAY=colour243
 
 # {{{ status
 # base color
-tmux set -g status-style "bg=$TMUX_CZ_LIGHT_BLACK,fg=$TMUX_CZ_DARK_ORANGE"
+tmux set -g status-style "fg=$TMUX_CZ_DARK_ORANGE,bg=$TMUX_CZ_LIGHT_BLACK" || { tmux set -g status-fg "$TMUX_CZ_DARK_ORANGE"; tmux set -g status-bg "$TMUX_CZ_LIGHT_BLACK"; }
 # }}}
 
 # {{{ pane
-tmux set -g pane-border-style "fg=$TMUX_CZ_DARK_GRAY"
-tmux set -g pane-active-border-style "fg=$TMUX_CZ_DARK_ORANGE"
+tmux set -g pane-border-style "fg=$TMUX_CZ_DARK_GRAY" || { tmux set -g pane-border-fg "$TMUX_CZ_DARK_GRAY"; }
+tmux set -g pane-active-border-style "fg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g pane-active-border-fg "$TMUX_CZ_DARK_ORANGE"; }
 # }}}
 
 # {{{ mode
-tmux set -g mode-style "bg=$TMUX_CZ_DARK_ORANGE,fg=$TMUX_CZ_LIGHT_BLACK"
+tmux set -g mode-style "fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g mode-style-fg "$TMUX_CZ_LIGHT_BLACK"; tmux set -g mode-style-bg "$TMUX_CZ_DARK_ORANGE"; }
 # }}}
 
 # {{{ message
-tmux set -g message-style "bg=$TMUX_CZ_LIGHT_BLACK,fg=$TMUX_CZ_DARK_ORANGE"
+tmux set -g message-style "fg=$TMUX_CZ_DARK_ORANGE,bg=$TMUX_CZ_LIGHT_BLACK" || { tmux set -g message-fg "$TMUX_CZ_DARK_ORANGE"; tmux set -g message-bg "$TMUX_CZ_LIGHT_BLACK"; }
 # }}}
 
 # {{{ display pane number
