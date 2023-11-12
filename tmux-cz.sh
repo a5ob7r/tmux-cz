@@ -226,7 +226,9 @@ fi
 # window-status-format {{{
 tmux set -g window-status-format ''
 
-tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_LIGHT_GRAY]$left_separator_glyph#[none]"
+if (( ${#window_status_sub_elements[@]} )); then
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_LIGHT_GRAY]$left_separator_glyph#[none]"
+fi
 
 for (( i = 0; i < ${#window_status_sub_elements[@]}; i++ )); do
   if (( i != 0 )); then
@@ -236,7 +238,13 @@ for (( i = 0; i < ${#window_status_sub_elements[@]}; i++ )); do
   tmux set -ga window-status-format "#[fg=$TMUX_CZ_WHITE,bg=$TMUX_CZ_LIGHT_GRAY]${window_status_sub_elements[i]}#[none]"
 done
 
-tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$left_separator_glyph#[none]"
+if (( ${#window_status_sub_elements[@]} && ${#window_status_main_elements[@]} )); then
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$left_separator_glyph#[none]"
+elif (( ${#window_status_sub_elements[@]} )); then
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+elif (( ${#window_status_main_elements[@]} )); then
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_DARK_GRAY]$left_separator_glyph#[none]"
+fi
 
 for (( i = 0; i < ${#window_status_main_elements[@]}; i++ )); do
   if (( i != 0 )); then
@@ -246,13 +254,17 @@ for (( i = 0; i < ${#window_status_main_elements[@]}; i++ )); do
   tmux set -ga window-status-format "#[fg=$TMUX_CZ_WHITE,bg=$TMUX_CZ_DARK_GRAY]${window_status_main_elements[i]}#[none]"
 done
 
-tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+if (( ${#window_status_main_elements[@]} )); then
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+fi
 # }}}
 
 # window-status-current-format {{{
 tmux set -g window-status-current-format ''
 
-tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]$left_separator_glyph#[none]"
+if (( ${#window_status_current_sub_elements[@]} )); then
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]$left_separator_glyph#[none]"
+fi
 
 for (( i = 0; i < ${#window_status_current_sub_elements[@]}; i++ )); do
   if (( i != 0 )); then
@@ -262,7 +274,13 @@ for (( i = 0; i < ${#window_status_current_sub_elements[@]}; i++ )); do
   tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_BLACK,bg=$TMUX_CZ_YELLOW_GREEN]${window_status_current_sub_elements[i]}#[none]"
 done
 
-tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_NAVAJO_WHITE]$left_separator_glyph#[none]"
+if (( ${#window_status_current_sub_elements[@]} && ${#window_status_current_main_elements[@]} )); then
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_NAVAJO_WHITE]$left_separator_glyph#[none]"
+elif (( ${#window_status_current_sub_elements[@]} )); then
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+elif (( ${#window_status_current_main_elements[@]} )); then
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_NAVAJO_WHITE]$left_separator_glyph#[none]"
+fi
 
 for (( i = 0; i < ${#window_status_current_main_elements[@]}; i++ )); do
   if (( i != 0 )); then
@@ -272,7 +290,9 @@ for (( i = 0; i < ${#window_status_current_main_elements[@]}; i++ )); do
   tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_BLACK,bg=$TMUX_CZ_NAVAJO_WHITE]${window_status_current_main_elements[i]}#[none]"
 done
 
-tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_NAVAJO_WHITE,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+if (( ${#window_status_current_main_elements[@]} )); then
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_NAVAJO_WHITE,bg=$TMUX_CZ_LIGHT_BLACK]$left_separator_glyph#[none]"
+fi
 # }}}
 
 # status-left / status-right {{{
