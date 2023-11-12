@@ -68,7 +68,7 @@ tmux set -g pane-active-border-style "fg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g 
 # }}}
 
 # {{{ mode
-tmux set -g mode-style "fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g mode-style-fg "$TMUX_CZ_LIGHT_BLACK"; tmux set -g mode-style-bg "$TMUX_CZ_DARK_ORANGE"; }
+tmux set -g mode-style "fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g mode-fg "$TMUX_CZ_LIGHT_BLACK"; tmux set -g mode-bg "$TMUX_CZ_DARK_ORANGE"; }
 # }}}
 
 # {{{ message
