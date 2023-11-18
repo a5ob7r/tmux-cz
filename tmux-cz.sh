@@ -34,7 +34,8 @@ fetch_tmux_option () {
 }
 # }}}
 
-# {{{ color
+# {{{ colors
+# constants
 readonly TMUX_CZ_BLACK=colour0
 readonly TMUX_CZ_WHITE=colour15
 readonly TMUX_CZ_GREEN=colour29
@@ -45,6 +46,14 @@ readonly TMUX_CZ_NAVAJO_WHITE=colour223
 readonly TMUX_CZ_LIGHT_BLACK=colour235
 readonly TMUX_CZ_DARK_GRAY=colour237
 readonly TMUX_CZ_LIGHT_GRAY=colour243
+
+# options
+TMUX_CZ_STATUS_BACKGROUND_COLOUR=$(fetch_tmux_option @TMUX_CZ_STATUS_BACKGROUND_COLOUR || echo -n default)
+# }}}
+
+# {{{ status
+# base color
+tmux set -g status-style "bg=$TMUX_CZ_STATUS_BACKGROUND_COLOUR" || { tmux set -g status-bg "$TMUX_CZ_STATUS_BACKGROUND_COLOUR"; }
 # }}}
 
 # {{{ pane

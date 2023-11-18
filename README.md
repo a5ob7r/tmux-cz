@@ -54,6 +54,21 @@ This theme provides some low-level options, which are not user-friendly and are 
 
 Please see [Configurations](#Configurations) section at first instead of this section.
 
+### Colours
+
+#### @TMUX_CZ_STATUS_BACKGROUND_COLOUR
+
+The colour of status line background.
+
+The value must be one of valid colour values of Tmux.
+See the "STYLES" section in `tmux(1)` for details.
+
+By default,
+
+```tmux
+set @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
+```
+
 ### Status Line Decorations
 
 #### @TMUX_CZ_LEFT_DECORATION
