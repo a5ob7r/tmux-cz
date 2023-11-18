@@ -192,7 +192,7 @@ fi
 tmux set -g window-status-format ''
 
 if (( ${#window_status_sub_elements[@]} )); then
-  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=default,reverse]$left_separator_glyph#[none]"
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=default,reverse]$left_separator_glyph#[noreverse]#[none]"
 fi
 
 for (( i = 0; i < ${#window_status_sub_elements[@]}; i++ )); do
@@ -208,7 +208,7 @@ if (( ${#window_status_sub_elements[@]} && ${#window_status_main_elements[@]} ))
 elif (( ${#window_status_sub_elements[@]} )); then
   tmux set -ga window-status-format "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=default]$left_separator_glyph#[none]"
 elif (( ${#window_status_main_elements[@]} )); then
-  tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=default,reverse]$left_separator_glyph#[none]"
+  tmux set -ga window-status-format "#[fg=$TMUX_CZ_DARK_GRAY,bg=default,reverse]$left_separator_glyph#[noreverse]#[none]"
 fi
 
 for (( i = 0; i < ${#window_status_main_elements[@]}; i++ )); do
@@ -228,7 +228,7 @@ fi
 tmux set -g window-status-current-format ''
 
 if (( ${#window_status_current_sub_elements[@]} )); then
-  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=default,reverse]$left_separator_glyph#[none]"
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=default,reverse]$left_separator_glyph#[noreverse]#[none]"
 fi
 
 for (( i = 0; i < ${#window_status_current_sub_elements[@]}; i++ )); do
@@ -244,7 +244,7 @@ if (( ${#window_status_current_sub_elements[@]} && ${#window_status_current_main
 elif (( ${#window_status_current_sub_elements[@]} )); then
   tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=default]$left_separator_glyph#[none]"
 elif (( ${#window_status_current_main_elements[@]} )); then
-  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_NAVAJO_WHITE,bg=default,reverse]$left_separator_glyph#[none]"
+  tmux set -ga window-status-current-format "#[fg=$TMUX_CZ_NAVAJO_WHITE,bg=default,reverse]$left_separator_glyph#[noreverse]#[none]"
 fi
 
 for (( i = 0; i < ${#window_status_current_main_elements[@]}; i++ )); do
@@ -281,7 +281,7 @@ for (( i = 0; i < ${#status_left_elements[@]}; i++ )); do
         tmux set -ga status-left "$({ format_to_toggle_foreground_color_by_client_prefix "$TMUX_CZ_DARK_GRAY" "$TMUX_CZ_LIGHT_GRAY"; format_to_toggle_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; } || true)$left_subseparator_glyph#[none]"
       fi
 
-      tmux set -ga status-left "#[fg=$TMUX_CZ_DARK_ORANGE,bg=$TMUX_CZ_DARK_GRAY]#{?client_prefix,#[reverse]#[bold],}${status_left_elements[i]}#[none]"
+      tmux set -ga status-left "#[fg=$TMUX_CZ_DARK_ORANGE,bg=$TMUX_CZ_DARK_GRAY]#{?client_prefix,#[reverse]#[bold],}${status_left_elements[i]}#[noreverse]#[none]"
       ;;
   esac
 
