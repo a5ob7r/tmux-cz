@@ -57,6 +57,7 @@ tmux set -g mode-style "fg=$TMUX_CZ_LIGHT_BLACK,bg=$TMUX_CZ_DARK_ORANGE" || { tm
 # }}}
 
 # {{{ message
+tmux set -g message-command-style "fg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g message-command-fg "$TMUX_CZ_DARK_ORANGE"; }
 tmux set -g message-style "fg=$TMUX_CZ_DARK_ORANGE" || { tmux set -g message-fg "$TMUX_CZ_DARK_ORANGE"; }
 # }}}
 
