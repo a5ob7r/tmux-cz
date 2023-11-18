@@ -54,7 +54,7 @@ This theme provides some low-level options, which are not user-friendly and are 
 
 Please see [Configurations](#Configurations) section at first instead of this section.
 
-### Information Area Decorations
+### Status Line Decorations
 
 #### @TMUX_CZ_LEFT_DECORATION
 
@@ -104,9 +104,9 @@ By default,
 set @TMUX_CZ_RIGHT_SUBSEPARATOR '|'
 ```
 
-### Information Area Elements
+### Status Line Elements
 
-These options define elements for each information area as a virtual array user option of Tmux.
+These options define elements for each status line components as a virtual array user option of Tmux.
 
 Tmux doesn't support to define user options with an array type.
 Instead, this theme treats a collection of plain user options as an array user option using a variable name format convention.
@@ -208,9 +208,9 @@ set -g @TMUX_CZ_LEFT_SUBSEPARATOR ' '
 set -g @TMUX_CZ_RIGHT_SUBSEPARATOR ' '
 ```
 
-### Add elements to information area
+### Add elements to status line components
 
-To add ` foo ` to status-left area,
+To add ` foo ` to the status-left component,
 
 ```tmux
 set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_1 TMUX_CZ_LEFT_DECORATION
@@ -227,7 +227,7 @@ set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_2 ' %Y-%m-%d(%a) '
 set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
 ```
 
-### Remove elements from information area
+### Remove elements from status line components
 
 To remove the host name element,
 
@@ -242,9 +242,9 @@ set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' %H:%M '
 set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %Y-%m-%d(%a) '
 ```
 
-### Hide information areas
+### Hide status line components
 
-To hide each information areas completely,
+To hide each status line components completely,
 
 ```tmux
 # To hide status-left.
