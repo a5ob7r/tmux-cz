@@ -15,12 +15,6 @@ strip_quotations () {
   esac
 }
 
-format_to_swap_foreground_background_color_by_client_prefix () {
-  local foreground_color=$1
-  local background_color=$2
-  echo -n "#{?client_prefix,#[fg=$background_color]#[bg=$foreground_color],#[fg=$foreground_color]#[bg=$background_color]}"
-}
-
 format_to_toggle_foreground_color_by_client_prefix () {
   local client_prefix_on_foreground_color=$1
   local client_prefix_off_foreground_color=$2
@@ -31,10 +25,6 @@ format_to_toggle_background_color_by_client_prefix () {
   local client_prefix_on_background_color=$1
   local client_prefix_off_background_color=$2
   echo -n "#{?client_prefix,#[bg=$client_prefix_on_background_color],#[bg=$client_prefix_off_background_color]}"
-}
-
-format_to_toggle_bold_by_client_prefix () {
-  echo -n "#[#{?client_prefix,bold,}]"
 }
 
 fetch_tmux_option () {
@@ -281,7 +271,7 @@ for (( i = 0; i < ${#status_left_elements[@]}; i++ )); do
         tmux set -ga status-left "$({ format_to_toggle_foreground_color_by_client_prefix "$TMUX_CZ_DARK_GRAY" "$TMUX_CZ_LIGHT_GRAY"; format_to_toggle_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; } || true)$left_subseparator_glyph#[none]"
       fi
 
-      tmux set -ga status-left "$({ format_to_swap_foreground_background_color_by_client_prefix "$TMUX_CZ_DARK_ORANGE" "$TMUX_CZ_DARK_GRAY"; format_to_toggle_bold_by_client_prefix; } || true)${status_left_elements[i]}#[none]"
+      tmux set -ga status-left "#[fg=$TMUX_CZ_DARK_ORANGE,bg=$TMUX_CZ_DARK_GRAY]#{?client_prefix,#[reverse]#[bold],}${status_left_elements[i]}#[none]"
       ;;
   esac
 
