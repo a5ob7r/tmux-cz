@@ -126,7 +126,7 @@ while read -r; do
       enable_default_window_status_current_sub_elements=0
       ;;
     @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_* )
-      window_status_current_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_* }")")
+      window_status_current_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_* }")")
       enable_default_window_status_current_sub_elements=0
       ;;
     @TMUX_CZ_LEFT_STATUS_ELEMENT_\ * )
