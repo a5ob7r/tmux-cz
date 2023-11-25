@@ -6,14 +6,14 @@ A tmux theme inspired by CZ2128 Delta
 
 ## Requirements
 
-A Tmux enabled 256 colours and UTF-8 features.
+A Tmux with the 256 colours feature.
 
-Almost all Tmux probably fill the requirements, so we don't need to do extra something.
+Almost all Tmux probably fill the requirement, so we don't need to do extra something.
 
 If a problem is happened, please try the following command to run Tmux or equivalent configurations to it.
 
 ```sh
-tmux -2 -u
+tmux -2
 ```
 
 ## Installation
