@@ -95,7 +95,7 @@ enable_default_status_right_elements=1
 left_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_LEFT_DECORATION || echo -n '█')
 left_separator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SEPARATOR || echo -n '')
 left_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SUBSEPARATOR || echo -n '|')
-right_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_DECORATION || echo -n '█')
+right_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_RIGHT_DECORATION || echo -n '█')
 right_separator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SEPARATOR || echo -n '')
 right_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SUBSEPARATOR || echo -n '|')
 
@@ -183,7 +183,7 @@ if (( enable_default_status_right_elements )); then
   status_right_elements=(
     ' %H:%M '
     ' %Y-%m-%d(%a) '
-    TMUX_CZ_RIGHT_DECORATION
+    TMUX_CZ_STATUS_RIGHT_DECORATION
   )
 fi
 # }}}
@@ -314,7 +314,7 @@ for (( i = 0; i < ${#status_right_elements[@]}; i++ )); do
   fi
 
   case "${status_right_elements[i]}" in
-    TMUX_CZ_RIGHT_DECORATION )
+    TMUX_CZ_STATUS_RIGHT_DECORATION )
       tmux set -ga status-right "#[fg=$TMUX_CZ_LIGHT_GRAY,bg=$TMUX_CZ_DARK_GRAY]$right_decoration_glyph#[none]"
       tmux set -ga status-right "#[fg=$TMUX_CZ_YELLOW_GREEN,bg=$TMUX_CZ_LIGHT_GRAY]$right_decoration_glyph#[none]"
       tmux set -ga status-right "#[fg=$TMUX_CZ_GREEN,bg=$TMUX_CZ_YELLOW_GREEN]$right_decoration_glyph#[none]"
@@ -325,7 +325,7 @@ for (( i = 0; i < ${#status_right_elements[@]}; i++ )); do
       fi
       ;;
     * )
-      if (( i != 0 )) && [[ ${status_right_elements[i - 1]} != TMUX_CZ_RIGHT_DECORATION ]]; then
+      if (( i != 0 )) && [[ ${status_right_elements[i - 1]} != TMUX_CZ_STATUS_RIGHT_DECORATION ]]; then
         tmux set -ga status-right "#[fg=$TMUX_CZ_DARK_GRAY,bg=default,reverse]$right_subseparator_glyph#[noreverse]#[none]"
       fi
 

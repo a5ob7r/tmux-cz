@@ -79,12 +79,12 @@ By default,
 set -g @TMUX_CZ_STATUS_LEFT_DECORATION '█'
 ```
 
-#### @TMUX_CZ_RIGHT_DECORATION
+#### @TMUX_CZ_STATUS_RIGHT_DECORATION
 
 By default,
 
 ```tmux
-set -g @TMUX_CZ_RIGHT_DECORATION '█'
+set -g @TMUX_CZ_STATUS_RIGHT_DECORATION '█'
 ```
 
 #### @TMUX_CZ_LEFT_SEPARATOR
@@ -192,7 +192,7 @@ By default,
 ```tmux
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' %H:%M '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %Y-%m-%d(%a) '
-set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 TMUX_CZ_RIGHT_DECORATION
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 TMUX_CZ_STATUS_RIGHT_DECORATION
 ```
 
 ## Configurations
@@ -207,7 +207,7 @@ To decorate this theme with Powerline Font,
 
 ```tmux
 set -g @TMUX_CZ_STATUS_LEFT_DECORATION 
-set -g @TMUX_CZ_RIGHT_DECORATION 
+set -g @TMUX_CZ_STATUS_RIGHT_DECORATION 
 set -g @TMUX_CZ_LEFT_SEPARATOR 
 set -g @TMUX_CZ_RIGHT_SEPARATOR 
 set -g @TMUX_CZ_LEFT_SUBSEPARATOR 
@@ -216,7 +216,7 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR 
 # OR
 
 set -g @TMUX_CZ_STATUS_LEFT_DECORATION ' '
-set -g @TMUX_CZ_RIGHT_DECORATION ' '
+set -g @TMUX_CZ_STATUS_RIGHT_DECORATION ' '
 set -g @TMUX_CZ_LEFT_SEPARATOR ' '
 set -g @TMUX_CZ_RIGHT_SEPARATOR ' '
 set -g @TMUX_CZ_LEFT_SUBSEPARATOR ' '
@@ -239,7 +239,7 @@ Or add an element using [tmux-battery](https://github.com/tmux-plugins/tmux-batt
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' #{battery_status_fg}#{battery_icon} #{battery_percentage} '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %H:%M '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 ' %Y-%m-%d(%a) '
-set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_3 TMUX_CZ_STATUS_RIGHT_DECORATION
 ```
 
 ### Remove elements from status line components
