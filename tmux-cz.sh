@@ -129,11 +129,11 @@ while read -r; do
       window_status_current_sub_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_* }")")
       enable_default_window_status_current_sub_elements=0
       ;;
-    @TMUX_CZ_LEFT_STATUS_ELEMENT_\ * )
+    @TMUX_CZ_STATUS_LEFT_ELEMENT_\ * )
       enable_default_status_left_elements=0
       ;;
-    @TMUX_CZ_LEFT_STATUS_ELEMENT_* )
-      status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_LEFT_STATUS_ELEMENT_* }")")
+    @TMUX_CZ_STATUS_LEFT_ELEMENT_* )
+      status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_STATUS_LEFT_ELEMENT_* }")")
       enable_default_status_left_elements=0
       ;;
     @TMUX_CZ_RIGHT_STATUS_ELEMENT_\ * )

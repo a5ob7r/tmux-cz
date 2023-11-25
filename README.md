@@ -137,7 +137,7 @@ The valid `PREFIX` and valid `NAME`s are below, but this theme treats any charac
     - WINDOW_STATUS_SUB_ELEMENT
     - WINDOW_STATUS_CURRENT_MAIN_ELEMENT
     - WINDOW_STATUS_CURRENT_SUB_ELEMENT
-    - LEFT_STATUS_ELEMENT
+    - STATUS_LEFT_ELEMENT
     - RIGHT_STATUS_ELEMENT
 
 If a variable name is `@TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0`, `PREFIX` is `TMUX_CZ`, `NAME` is `WINDOW_STATUS_MAIN_ELEMENT` and `INDEX` is `0`.
@@ -176,13 +176,13 @@ By default,
 set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
 ```
 
-#### @TMUX_CZ_LEFT_STATUS_ELEMENT_*
+#### @TMUX_CZ_STATUS_LEFT_ELEMENT_*
 
 By default,
 
 ```tmux
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_1 ' #H [#S] '
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 ' #H [#S] '
 ```
 
 #### @TMUX_CZ_RIGHT_STATUS_ELEMENT_*
@@ -228,9 +228,9 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR ' '
 To add ` foo ` to the status-left component,
 
 ```tmux
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_1 TMUX_CZ_LEFT_DECORATION
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_2 ' #H [#S] '
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_3 ' foo '
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_2 ' #H [#S] '
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_3 ' foo '
 ```
 
 Or add an element using [tmux-battery](https://github.com/tmux-plugins/tmux-battery),
@@ -247,7 +247,7 @@ set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
 To remove the host name element,
 
 ```tmux
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
 ```
 
 Or to remove the right decoration element,
@@ -263,7 +263,7 @@ To hide each status line components completely,
 
 ```tmux
 # To hide status-left.
-set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_ ''
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_ ''
 
 # To hide a main area of window-status-format.
 set -g @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_ ''
