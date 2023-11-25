@@ -61,7 +61,7 @@ Please see [Configurations](#Configurations) section at first instead of this se
 The colour of status line background.
 
 The value must be one of valid colour values of Tmux.
-See the "STYLES" section in `tmux(1)` for details.
+See the `STYLES` section in `tmux(1)` for details.
 
 By default,
 
