@@ -136,11 +136,11 @@ while read -r; do
       status_left_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_STATUS_LEFT_ELEMENT_* }")")
       enable_default_status_left_elements=0
       ;;
-    @TMUX_CZ_RIGHT_STATUS_ELEMENT_\ * )
+    @TMUX_CZ_STATUS_RIGHT_ELEMENT_\ * )
       enable_default_status_right_elements=0
       ;;
-    @TMUX_CZ_RIGHT_STATUS_ELEMENT_* )
-      status_right_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_RIGHT_STATUS_ELEMENT_* }")")
+    @TMUX_CZ_STATUS_RIGHT_ELEMENT_* )
+      status_right_elements+=("$(strip_quotations "${REPLY#@TMUX_CZ_STATUS_RIGHT_ELEMENT_* }")")
       enable_default_status_right_elements=0
       ;;
     * )

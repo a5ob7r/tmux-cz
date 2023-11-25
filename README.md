@@ -138,7 +138,7 @@ The valid `PREFIX` and valid `NAME`s are below, but this theme treats any charac
     - WINDOW_STATUS_CURRENT_MAIN_ELEMENT
     - WINDOW_STATUS_CURRENT_SUB_ELEMENT
     - STATUS_LEFT_ELEMENT
-    - RIGHT_STATUS_ELEMENT
+    - STATUS_RIGHT_ELEMENT
 
 If a variable name is `@TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0`, `PREFIX` is `TMUX_CZ`, `NAME` is `WINDOW_STATUS_MAIN_ELEMENT` and `INDEX` is `0`.
 
@@ -185,14 +185,14 @@ set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
 set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 ' #H [#S] '
 ```
 
-#### @TMUX_CZ_RIGHT_STATUS_ELEMENT_*
+#### @TMUX_CZ_STATUS_RIGHT_ELEMENT_*
 
 By default,
 
 ```tmux
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' %H:%M '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %Y-%m-%d(%a) '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_2 TMUX_CZ_RIGHT_DECORATION
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' %H:%M '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %Y-%m-%d(%a) '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 TMUX_CZ_RIGHT_DECORATION
 ```
 
 ## Configurations
@@ -236,10 +236,10 @@ set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_3 ' foo '
 Or add an element using [tmux-battery](https://github.com/tmux-plugins/tmux-battery),
 
 ```tmux
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' #{battery_status_fg}#{battery_icon} #{battery_percentage} '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %H:%M '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_2 ' %Y-%m-%d(%a) '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' #{battery_status_fg}#{battery_icon} #{battery_percentage} '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %H:%M '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 ' %Y-%m-%d(%a) '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
 ```
 
 ### Remove elements from status line components
@@ -253,8 +253,8 @@ set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
 Or to remove the right decoration element,
 
 ```tmux
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' %H:%M '
-set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %Y-%m-%d(%a) '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' %H:%M '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %Y-%m-%d(%a) '
 ```
 
 ### Hide status line components
