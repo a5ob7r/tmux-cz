@@ -76,7 +76,7 @@ set -g @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
 By default,
 
 ```tmux
-set -g @TMUX_CZ_STATUS_LEFT_DECORATION '█'
+set -g @TMUX_CZ_STATUS_LEFT_DECORATION '#[reverse] #[noreverse]'
 ```
 
 #### @TMUX_CZ_STATUS_RIGHT_DECORATION
@@ -84,7 +84,7 @@ set -g @TMUX_CZ_STATUS_LEFT_DECORATION '█'
 By default,
 
 ```tmux
-set -g @TMUX_CZ_STATUS_RIGHT_DECORATION '█'
+set -g @TMUX_CZ_STATUS_RIGHT_DECORATION '#[reverse] #[noreverse]'
 ```
 
 #### @TMUX_CZ_LEFT_SEPARATOR

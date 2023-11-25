@@ -92,10 +92,10 @@ status_right_elements=()
 enable_default_status_left_elements=1
 enable_default_status_right_elements=1
 
-left_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_LEFT_DECORATION || echo -n '█')
+left_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_LEFT_DECORATION || echo -n '#[reverse] #[noreverse]')
 left_separator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SEPARATOR || echo -n '')
 left_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_LEFT_SUBSEPARATOR || echo -n '|')
-right_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_RIGHT_DECORATION || echo -n '█')
+right_decoration_glyph=$(fetch_tmux_option @TMUX_CZ_STATUS_RIGHT_DECORATION || echo -n '#[reverse] #[noreverse]')
 right_separator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SEPARATOR || echo -n '')
 right_subseparator_glyph=$(fetch_tmux_option @TMUX_CZ_RIGHT_SUBSEPARATOR || echo -n '|')
 
