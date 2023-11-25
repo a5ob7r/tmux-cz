@@ -71,12 +71,12 @@ set -g @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
 
 ### Status Line Decorations
 
-#### @TMUX_CZ_LEFT_DECORATION
+#### @TMUX_CZ_STATUS_LEFT_DECORATION
 
 By default,
 
 ```tmux
-set -g @TMUX_CZ_LEFT_DECORATION '█'
+set -g @TMUX_CZ_STATUS_LEFT_DECORATION '█'
 ```
 
 #### @TMUX_CZ_RIGHT_DECORATION
@@ -181,7 +181,7 @@ set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_fl
 By default,
 
 ```tmux
-set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_STATUS_LEFT_DECORATION
 set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 ' #H [#S] '
 ```
 
@@ -206,7 +206,7 @@ This section provides some configuration examples.
 To decorate this theme with Powerline Font,
 
 ```tmux
-set -g @TMUX_CZ_LEFT_DECORATION 
+set -g @TMUX_CZ_STATUS_LEFT_DECORATION 
 set -g @TMUX_CZ_RIGHT_DECORATION 
 set -g @TMUX_CZ_LEFT_SEPARATOR 
 set -g @TMUX_CZ_RIGHT_SEPARATOR 
@@ -215,7 +215,7 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR 
 
 # OR
 
-set -g @TMUX_CZ_LEFT_DECORATION ' '
+set -g @TMUX_CZ_STATUS_LEFT_DECORATION ' '
 set -g @TMUX_CZ_RIGHT_DECORATION ' '
 set -g @TMUX_CZ_LEFT_SEPARATOR ' '
 set -g @TMUX_CZ_RIGHT_SEPARATOR ' '
@@ -228,7 +228,7 @@ set -g @TMUX_CZ_RIGHT_SUBSEPARATOR ' '
 To add ` foo ` to the status-left component,
 
 ```tmux
-set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 TMUX_CZ_STATUS_LEFT_DECORATION
 set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_2 ' #H [#S] '
 set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_3 ' foo '
 ```
@@ -247,7 +247,7 @@ set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_3 TMUX_CZ_RIGHT_DECORATION
 To remove the host name element,
 
 ```tmux
-set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_0 TMUX_CZ_STATUS_LEFT_DECORATION
 ```
 
 Or to remove the right decoration element,
