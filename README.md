@@ -66,7 +66,7 @@ See the "STYLES" section in `tmux(1)` for details.
 By default,
 
 ```tmux
-set @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
+set -g @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
 ```
 
 ### Status Line Decorations
@@ -76,7 +76,7 @@ set @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
 By default,
 
 ```tmux
-set @TMUX_CZ_LEFT_DECORATION '█'
+set -g @TMUX_CZ_LEFT_DECORATION '█'
 ```
 
 #### @TMUX_CZ_RIGHT_DECORATION
@@ -84,7 +84,7 @@ set @TMUX_CZ_LEFT_DECORATION '█'
 By default,
 
 ```tmux
-set @TMUX_CZ_RIGHT_DECORATION '█'
+set -g @TMUX_CZ_RIGHT_DECORATION '█'
 ```
 
 #### @TMUX_CZ_LEFT_SEPARATOR
@@ -92,7 +92,7 @@ set @TMUX_CZ_RIGHT_DECORATION '█'
 By default,
 
 ```tmux
-set @TMUX_CZ_LEFT_SEPARATOR ''
+set -g @TMUX_CZ_LEFT_SEPARATOR ''
 ```
 
 #### @TMUX_CZ_RIGHT_SEPARATOR
@@ -100,7 +100,7 @@ set @TMUX_CZ_LEFT_SEPARATOR ''
 By default,
 
 ```tmux
-set @TMUX_CZ_RIGHT_SEPARATOR ''
+set -g @TMUX_CZ_RIGHT_SEPARATOR ''
 ```
 
 #### @TMUX_CZ_LEFT_SUBSEPARATOR
@@ -108,7 +108,7 @@ set @TMUX_CZ_RIGHT_SEPARATOR ''
 By default,
 
 ```tmux
-set @TMUX_CZ_LEFT_SUBSEPARATOR '|'
+set -g @TMUX_CZ_LEFT_SUBSEPARATOR '|'
 ```
 
 #### @TMUX_CZ_RIGHT_SUBSEPARATOR
@@ -116,7 +116,7 @@ set @TMUX_CZ_LEFT_SUBSEPARATOR '|'
 By default,
 
 ```tmux
-set @TMUX_CZ_RIGHT_SUBSEPARATOR '|'
+set -g @TMUX_CZ_RIGHT_SUBSEPARATOR '|'
 ```
 
 ### Status Line Elements
@@ -149,7 +149,7 @@ The special format `@PREFIX_NAME_` with any value, which is no `INDEX`, means th
 By default,
 
 ```tmux
-set @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0 ' #{window_name} '
+set -g @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0 ' #{window_name} '
 ```
 
 #### @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_*
@@ -157,7 +157,7 @@ set @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0 ' #{window_name} '
 By default,
 
 ```tmux
-set @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
+set -g @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
 ```
 
 #### @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_*
@@ -165,7 +165,7 @@ set @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
 By default,
 
 ```tmux
-set @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_0 ' #{window_name} '
+set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_0 ' #{window_name} '
 ```
 
 #### @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_*
@@ -173,7 +173,7 @@ set @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_0 ' #{window_name} '
 By default,
 
 ```tmux
-set @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
+set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
 ```
 
 #### @TMUX_CZ_LEFT_STATUS_ELEMENT_*
@@ -181,8 +181,8 @@ set @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_flags
 By default,
 
 ```tmux
-set @TMUX_CZ_LEFT_STATUS_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
-set @TMUX_CZ_LEFT_STATUS_ELEMENT_1 ' #H [#S] '
+set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_0 TMUX_CZ_LEFT_DECORATION
+set -g @TMUX_CZ_LEFT_STATUS_ELEMENT_1 ' #H [#S] '
 ```
 
 #### @TMUX_CZ_RIGHT_STATUS_ELEMENT_*
@@ -190,9 +190,9 @@ set @TMUX_CZ_LEFT_STATUS_ELEMENT_1 ' #H [#S] '
 By default,
 
 ```tmux
-set @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' %H:%M '
-set @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %Y-%m-%d(%a) '
-set @TMUX_CZ_RIGHT_STATUS_ELEMENT_2 TMUX_CZ_RIGHT_DECORATION
+set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_0 ' %H:%M '
+set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_1 ' %Y-%m-%d(%a) '
+set -g @TMUX_CZ_RIGHT_STATUS_ELEMENT_2 TMUX_CZ_RIGHT_DECORATION
 ```
 
 ## Configurations
