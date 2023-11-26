@@ -306,7 +306,7 @@ set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_3 ' foo '
 Or add an element using [tmux-battery](https://github.com/tmux-plugins/tmux-battery),
 
 ```tmux
-set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' #{battery_status_fg}#{battery_icon} #{battery_percentage} '
+set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_0 ' #{battery_icon} #{battery_percentage} '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_1 ' %H:%M '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_2 ' %Y-%m-%d(%a) '
 set -g @TMUX_CZ_STATUS_RIGHT_ELEMENT_3 TMUX_CZ_STATUS_RIGHT_DECORATION
