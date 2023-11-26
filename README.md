@@ -71,7 +71,15 @@ set -g @TMUX_CZ_STATUS_BACKGROUND_COLOUR default
 
 ### Status Line Decorations
 
+Colourful decorations in status-left / status-right.
+
 #### @TMUX_CZ_STATUS_LEFT_DECORATION
+
+A Tmux format string to construct a part of a colourful decoration in status-left.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
 
 By default,
 
@@ -81,11 +89,22 @@ set -g @TMUX_CZ_STATUS_LEFT_DECORATION '#[reverse] #[noreverse]'
 
 #### @TMUX_CZ_STATUS_RIGHT_DECORATION
 
+A Tmux format string to construct a part of a colourful decoration in status-right.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
+
 By default,
 
 ```tmux
 set -g @TMUX_CZ_STATUS_RIGHT_DECORATION '#[reverse] #[noreverse]'
 ```
+
+### Status Line Separators
+
+Status line element separators in status-left / status-right / window-status / window-status-current.
+They are inserted between two components which have different background colours.
 
 #### @TMUX_CZ_LEFT_SEPARATOR
 
@@ -102,6 +121,11 @@ By default,
 ```tmux
 set -g @TMUX_CZ_RIGHT_SEPARATOR ''
 ```
+
+### Status Line Sub Separators
+
+Status line element sub separators in status-left / status-right / window-status / window-status-current.
+They are inserted between two components which have the same background colour.
 
 #### @TMUX_CZ_LEFT_SUBSEPARATOR
 
@@ -146,6 +170,12 @@ The special format `@PREFIX_NAME_` with any value, which is no `INDEX`, means th
 
 #### @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_*
 
+Format strings to represent elements in the right hand side in window-status.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
+
 By default,
 
 ```tmux
@@ -153,6 +183,12 @@ set -g @TMUX_CZ_WINDOW_STATUS_MAIN_ELEMENT_0 ' #{window_name} '
 ```
 
 #### @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_*
+
+Format strings to represent elements in the left hand side in window-status.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
 
 By default,
 
@@ -162,6 +198,12 @@ set -g @TMUX_CZ_WINDOW_STATUS_SUB_ELEMENT_0 ' #{window_index}#{window_flags} '
 
 #### @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_*
 
+Format strings to represent elements in the right hand side in window-status-current.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
+
 By default,
 
 ```tmux
@@ -169,6 +211,12 @@ set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_MAIN_ELEMENT_0 ' #{window_name} '
 ```
 
 #### @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_*
+
+Format strings to represent elements in the left hand side in window-status-current.
+
+The value must be a valid format string of Tmux.
+
+See `FORMATS` in `tmux(1)` for details.
 
 By default,
 
@@ -178,6 +226,17 @@ set -g @TMUX_CZ_WINDOW_STATUS_CURRENT_SUB_ELEMENT_0 ' #{window_index}#{window_fl
 
 #### @TMUX_CZ_STATUS_LEFT_ELEMENT_*
 
+Format strings to represent elements in status-left.
+
+The value must be a valid format string of Tmux or one of constants of this theme.
+
+See `FORMATS` in `tmux(1)` for details of format strings.
+
+All of constants are below.
+
+- TMUX_CZ_STATUS_LEFT_DECORATION
+    - The colourful decoration in status-left.
+
 By default,
 
 ```tmux
@@ -186,6 +245,17 @@ set -g @TMUX_CZ_STATUS_LEFT_ELEMENT_1 ' #H [#S] '
 ```
 
 #### @TMUX_CZ_STATUS_RIGHT_ELEMENT_*
+
+Format strings to represent elements in status-right.
+
+The value must be a valid format string of Tmux or one of constants of this theme.
+
+See `FORMATS` in `tmux(1)` for details of format strings.
+
+All of constants are below.
+
+- TMUX_CZ_STATUS_RIGHT_DECORATION
+    - The colourful decoration in status-right.
 
 By default,
 
